@@ -13,10 +13,12 @@ const config: Config = {
     },
     extend: {
       boxShadow: {
-        shinningCard: '1px 1px 25px 10px rgba(146, 148, 248, 0.4)',
+        card: '1px 1px 25px 10px rgba(244, 235, 220, 0.4)',
       },
       backgroundImage: {
         'tcs-background': "url('/images/TCS-background.jpeg')",
+        'astro-background': "url('/images/astro.png')",
+        card: 'linear-gradient(120deg, transparent, rgba(244, 235, 220, 0.4), transparent)',
       },
       colors: {
         primary: {

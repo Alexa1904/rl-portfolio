@@ -15,6 +15,7 @@ import FolderIcon from '@/components/icons/FolderIcon';
 import PDFIcon from '@/components/icons/PDFIcon';
 import ZIPIcon from '@/components/icons/ZIPIcon';
 import { ILanguage } from '@/models';
+import { responsibilities, content } from './TCSAstroSection';
 
 export const languages: ILanguage[] = [
   {
@@ -87,14 +88,14 @@ export const languages: ILanguage[] = [
               id: 'projects',
               name: 'Projects',
               icon: <FolderIcon className="w-6" />,
-              section: <TCSProjectsSection />,
+              section: <TCSProjectsSection content={content} />,
             },
           ],
           projects: [
             {
               id: 'astro',
               name: 'Astro',
-              section: <TCSAstroSection />,
+              section: <TCSAstroSection responsibilities={responsibilities} />,
             },
           ],
         },

@@ -4,7 +4,13 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { motion } from 'framer-motion';
 import React from 'react';
 
-export default function TCSProjectsSection() {
+interface TCSProjectsSectionProps {
+  content: { id: string; name: string }[];
+}
+
+export default function TCSProjectsSection({
+  content,
+}: TCSProjectsSectionProps) {
   const [language] = useLanguage();
   const [projects, setProjects] = React.useState(
     language.experiences?.jobs.find((job) => job.id === 'tcs')?.projects
@@ -41,7 +47,7 @@ export default function TCSProjectsSection() {
           ))}
         </div>
       </div>
-      <SectionModal isOpen={isOpen} setOpen={setOpen}>
+      <SectionModal isOpen={isOpen} setOpen={setOpen} content={content}>
         {modalSection}
       </SectionModal>
     </>

@@ -13,6 +13,12 @@ export interface ILanguage {
   };
 }
 
+export interface IResponsibility {
+  id: string;
+  name: string;
+  description: string;
+}
+
 export interface IJob {
   id: string;
   name: string;

@@ -1,18 +1,8 @@
 import React from 'react';
 import LaptopFrameIcon from '@/components/icons/LaptopFrameIcon';
 import ResponsibilitiesCard from './ResponsibilitiesCard';
-
-function Overview() {
-  return <div>Overview</div>;
-}
-
-function MyRole() {
-  return <div>Overview</div>;
-}
-
-function KeyCollaboration() {
-  return <div>Overview</div>;
-}
+import { IResponsibility } from '@/models';
+import { motion } from 'framer-motion';
 
 function TextSection({
   text,
@@ -33,78 +23,27 @@ function TextSection({
   );
 }
 
-export default function TCSAstroSection() {
+interface TCSAstroSectionProps {
+  responsibilities: IResponsibility[];
+}
+
+export default function TCSAstroSection({
+  responsibilities,
+}: TCSAstroSectionProps) {
   const [activeContent, setActiveContent] = React.useState({
     id: '',
     name: '',
   });
-  const content = [
-    { id: 'overview', name: 'Overview' },
-    { id: 'role', name: 'My Role' },
-    {
-      id: 'key-collaboration',
-      name: 'Key Collaboration',
-    },
-  ];
+  const [activeIndex, setActiveIndex] = React.useState<number>(-1);
 
   // - - - - - -
   //       - -, I'm the
   //       main developer in charge of analyzing and implementing new backend
   //       enhancement features for the Time Management "Enter Time" story as well
   //       as maintaining and optimizing existing functionalities.
-  const responsibilities = [
-    {
-      id: 'requirements-analysis',
-      name: 'Requirements Analysis',
-      description:
-        'Collaborated with stakeholders to gather requirements and understand user needs, ensuring the feature would align with business goals and improve user experience.',
-    },
-    {
-      id: 'database-design-and-integration',
-      name: 'Database Design and Integration',
-      description:
-        'Managed and optimized database schemas using MongoDB/Mongoose, implementing indexing and query optimization strategies to improve data access speeds.',
-    },
-    {
-      id: 'api-design-and-development',
-      name: 'API Design and Development',
-      description:
-        'Designed and implemented RESTful API endpoints to facilitate seamless communication between the frontend and backend systems. This involved defining data models, establishing endpoints, and ensuring compliance with REST principles, data integrity and efficient data retrieval.',
-    },
-    {
-      id: 'performance-optimization',
-      name: 'Performance Optimization',
-      description:
-        'Conducted performance testing and optimization, resulting in improved response times and reduced load on the server, enhancing the user experience even during peak usage.',
-    },
-    {
-      id: 'data-validation-and-security',
-      name: 'Data Validation and Security',
-      description:
-        'Implemented comprehensive data validation to ensure the data integrity and incorporated security measures such as authentication and authorization to protect sensitive user information.',
-    },
 
-    {
-      id: 'testing-and-quality-assurance',
-      name: 'Testing and Quality Assurance',
-      description:
-        'Created unit and integration tests to validate the functionality of the API and ensure that all edge cases were handled. Conducted load testing to assess performance under various scenarios.',
-    },
-    {
-      id: 'team-feedback-loop',
-      name: 'Team Feedback loop',
-      description:
-        'Engaged in regular stand-up meetings and sprint reviews, fostering open communication with the frontend team to align development efforts and quickly address any issues that arose during implementation.',
-    },
-    {
-      id: 'mentorship-and-collaboration-currently',
-      name: 'Mentorship and Collaboration Currently',
-      description:
-        'Provided guidance and mentorship to junior developers, fostering a collaborative environment. Actively participated in agile ceremonies, facilitating discussions and incorporating feedback from the team.',
-    },
-  ];
   return (
-    <div className="w-full h-full flex flex-row relative overflow-y-scroll">
+    <>
       <div className="w-full bg-gradient-to-b from-secondary-500 to-secondary-700 h-[600px] z-0" />
       <div className="w-[95%] flex flex-col items-center absolute">
         <div className="flex flex-col items-center mb-8">
@@ -117,12 +56,12 @@ export default function TCSAstroSection() {
         </div>
         <div className="w-4/5 h-[700px] relative">
           <div className="w-full flex justify-center absolute">
-            <div className="bg-tcs-background w-4/5 h-[600px] bg-cover left-0 right-0 mt-24 shadow-lg border border-secondary-400 rounded-md" />
+            <div className="bg-astro-background w-4/5 h-[600px] bg-cover left-0 right-0 mt-24 shadow-lg border border-secondary-400 rounded-md" />
           </div>
           <LaptopFrameIcon className="w-full" />
         </div>
         <div className="w-4/5 mt-24 mb-24">
-          <div className="w-full flex flex-row">
+          <div id="overview" className="w-full flex flex-row">
             <div className="w-2/3 pr-24">
               <TextSection
                 title="What is ASTRO?"
@@ -146,7 +85,8 @@ export default function TCSAstroSection() {
               <TextSection title="Role" text="Backend Developer" />
             </div>
           </div>
-          <div className="w-full mt-24">
+
+          <div id="role" className="w-full mt-24">
             <p className="font-sairaStencilOne text-xl text-secondary-50">
               My Role and Responsibilities
             </p>
@@ -159,39 +99,33 @@ export default function TCSAstroSection() {
                 My contributions included:
               </span>
             </p>
-            <div className="w-full flex flex-row flex-wrap space-y-4">
-              {responsibilities.map((resp) => (
-                <ResponsibilitiesCard />
+            <div className="w-full flex flex-wrap gap-y-9 mt-10">
+              {responsibilities.map((resp, index) => (
+                <ResponsibilitiesCard
+                  index={index}
+                  activeIndex={activeIndex}
+                  responsibility={resp}
+                  flip={activeIndex === index ? false : true}
+                  setActiveIndex={setActiveIndex}
+                />
               ))}
             </div>
           </div>
+
+          <div id="key-collaboration" className="w-full mt-24">
+            <p className="font-sairaStencilOne text-xl text-secondary-50">
+              Key Collaboration
+            </p>
+            <p className="w-full text-justify text-secondary-200 mt-2 text-lg">
+              I took ownership of the "Enter Time" story, driving the vision and
+              strategy for its development, where I contributed to a smoother
+              user experience and improved overall project efficiency, allowing
+              PwC to enhance its internal time tracking capabilities.
+            </p>
+          </div>
         </div>
       </div>
-      <div className="w-[10%] text-secondary-50 right-6 fixed top-[10%]">
-        <h1 className="font-sairaStencilOne mb-2 text-secondary-200">
-          CONTENT
-        </h1>
-        <div className="w-full flex flex-col space-y-1 ">
-          {content.map((con) => (
-            <button
-              type="button"
-              className={`${
-                con.id === activeContent?.id
-                  ? 'text-secondary-100'
-                  : 'text-secondary-300 hover:text-secondary-200'
-              } w-full flex justify-start`}
-              key={con.id}
-              onClick={(e) => {
-                e.preventDefault();
-                setActiveContent(con);
-              }}
-            >
-              {con.name}
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 
