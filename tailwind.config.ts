@@ -12,6 +12,12 @@ const config: Config = {
       sairaStencilOne: 'var(--saira)',
     },
     extend: {
+      boxShadow: {
+        shinningCard: '1px 1px 25px 10px rgba(146, 148, 248, 0.4)',
+      },
+      backgroundImage: {
+        'tcs-background': "url('/images/TCS-background.jpeg')",
+      },
       colors: {
         primary: {
           '50': '#FCF8F4',
@@ -39,6 +45,26 @@ const config: Config = {
         },
         background: '#111111',
         foreground: 'var(--foreground)',
+        shinningCard:
+          'linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.8) 50%,rgba(128,186,232,0) 99%,rgba(125,185,232,0) 100%);',
+      },
+      animation: {
+        'move-around': 'move 20s linear infinite',
+        'slide-shinning': 'slide 1s infinite',
+      },
+      keyframes: {
+        move: {
+          '0%': { transform: 'translateX(50px) translateY(-20px)' },
+          '10%': { transform: 'translateX(200px) translateY(100px)' },
+          '30%': { transform: 'translateX(0px) translateY(300px)' },
+          '70%': { transform: 'translateX(700px) translateY(0px)' },
+          '90%': { transform: 'translateX(1170px) translateY(400px)' },
+          '100%': { transform: 'translateX(900px) translateY(700px)' },
+        },
+        slide: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
       },
     },
   },

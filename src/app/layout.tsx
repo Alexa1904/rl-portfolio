@@ -29,12 +29,12 @@ export default function RootLayout({
     <html lang="en">
       <LanguageContextProvider>
         <body
-          className={`w-full min-h-screen overflow-y-scroll flex justify-center bg-background ${roboto.variable} ${sairaStencilOne.variable}`}
+          className={`w-full min-h-screen overflow-y-scroll flex flex-col items-center bg-background ${roboto.variable} ${sairaStencilOne.variable}`}
         >
-          <div className="w-11/12 py-6">
+          <div className="w-11/12 py-6 h-fit mb-5">
             <MainHeader />
-            {children}
           </div>
+          <div className="w-4/5 flex flex-col items-center">{children}</div>
         </body>
       </LanguageContextProvider>
     </html>
