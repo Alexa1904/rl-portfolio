@@ -1,11 +1,17 @@
+'use client';
 import React from 'react';
-import Image from 'next/image';
 
 interface TCSOverviewSectionProps {
   text: string;
 }
 
 export default function TCSOverviewSection({ text }: TCSOverviewSectionProps) {
+  const [textData, setTextData] = React.useState('');
+
+  React.useEffect(() => {
+    setTextData(text);
+    console.log(text);
+  }, [text]);
   return (
     <div className="w-[92%] h-[92%] bg-tcs-background bg-cover border-[8px] border-white rounded-md shadow-md relative">
       <div className="absolute right-0 w-2/4 h-[12%] bg-pink-400 flex flex-row justify-end items-center px-3">

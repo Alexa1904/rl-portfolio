@@ -1,3 +1,4 @@
+'use client';
 import SectionModal from '@/components/common/SectionModal';
 import ExecutableIcon from '@/components/icons/ExecutableIcon';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -5,7 +6,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 
 interface TCSProjectsSectionProps {
-  content: { id: string; name: string }[];
+  content: { title: string; content: { id: string; name: string }[] };
 }
 
 export default function TCSProjectsSection({
@@ -15,7 +16,7 @@ export default function TCSProjectsSection({
   const [projects, setProjects] = React.useState(
     language.experiences?.jobs.find((job) => job.id === 'tcs')?.projects
   );
-  const [modalSection, setModalSection] = React.useState();
+  const [modalSection, setModalSection] = React.useState<JSX.Element>();
   const [isOpen, setOpen] = React.useState(false);
 
   React.useEffect(() => {

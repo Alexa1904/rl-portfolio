@@ -7,8 +7,9 @@ import ExternalLinks from './ExternalLinks';
 import { AnimatePresence } from 'framer-motion';
 
 export default function MainHeader() {
-  const [language] = useLanguage();
+  const [language, , , setLanguageId] = useLanguage();
   const [pathName, setPathName] = React.useState('/experience');
+
   return (
     <AnimatePresence>
       <div className="w-full flex flex-row justify-between text-white font-roboto mt-6">
@@ -27,7 +28,10 @@ export default function MainHeader() {
           setPathName={setPathName}
           scrolled={false}
         />
-        <ExternalLinks />
+        <ExternalLinks
+          availableLanguages={language.availableLanguages}
+          setLanguageId={setLanguageId}
+        />
       </div>
     </AnimatePresence>
   );

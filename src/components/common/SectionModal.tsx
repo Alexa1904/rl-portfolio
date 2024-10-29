@@ -8,7 +8,7 @@ interface SectionModalProps {
   isOpen: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   children: React.ReactNode;
-  content?: { id: string; name: string }[];
+  content?: { title: string; content: { id: string; name: string }[] };
 }
 
 export default function SectionModal({
@@ -48,10 +48,10 @@ export default function SectionModal({
       </div>
       <div className="w-[10%] text-secondary-50 right-4 fixed top-[10%]">
         <h1 className="font-sairaStencilOne mb-2 text-secondary-200">
-          CONTENT
+          {content?.title}
         </h1>
         <div className="w-full flex flex-col space-y-1 ">
-          {content?.map((con) => (
+          {content?.content?.map((con) => (
             <button
               type="button"
               className="w-full flex justify-start text-secondary-300 hover:text-secondary-200"

@@ -25,22 +25,38 @@ function TextSection({
 
 interface TCSAstroSectionProps {
   responsibilities: IResponsibility[];
+  astroInfo: {
+    dateInfo: string;
+    whatIsAstro: {
+      title: string;
+      text1: string;
+      text2: string;
+    };
+    timeline: {
+      title: string;
+      text1: string;
+    };
+    role: {
+      title: string;
+      text1: string;
+    };
+    responsibilities: {
+      title: string;
+      text1: string;
+      text2: string;
+    };
+    keyCollaboration: {
+      title: string;
+      text1: string;
+    };
+  };
 }
 
 export default function TCSAstroSection({
   responsibilities,
+  astroInfo,
 }: TCSAstroSectionProps) {
-  const [activeContent, setActiveContent] = React.useState({
-    id: '',
-    name: '',
-  });
   const [activeIndex, setActiveIndex] = React.useState<number>(-1);
-
-  // - - - - - -
-  //       - -, I'm the
-  //       main developer in charge of analyzing and implementing new backend
-  //       enhancement features for the Time Management "Enter Time" story as well
-  //       as maintaining and optimizing existing functionalities.
 
   return (
     <>
@@ -51,7 +67,7 @@ export default function TCSAstroSection({
             ASTRO
           </h1>
           <p className="text-secondary-50 font-roboto text-lg mt-4">
-            By PwC - February 2023
+            {astroInfo?.dateInfo}
           </p>
         </div>
         <div className="w-4/5 h-[700px] relative">
@@ -64,39 +80,34 @@ export default function TCSAstroSection({
           <div id="overview" className="w-full flex flex-row">
             <div className="w-2/3 pr-24">
               <TextSection
-                title="What is ASTRO?"
-                text="Astro is an internal project owned by PriceWaterHouse Cooper
-              (PwC), designed to streamline various business processes and
-              enhance productivity. It serves as a centralized platform that
-              integrates multiple functionalities, making it easier for
-              employees to manage their tasks and workflows efficiently."
+                title={astroInfo?.whatIsAstro?.title}
+                text={astroInfo?.whatIsAstro?.text1}
               />
               <p className="mt-5 text-justify text-secondary-200 text-lg">
-                Overall, Astro serves as a vital tool for PwC employees,
-                enhancing operational efficiency and fostering collaboration
-                across teams.
+                {astroInfo?.whatIsAstro?.text2}
               </p>
             </div>
             <div className="w-1/3 flex flex-col space-y-12">
               <TextSection
-                title="Timeline & status"
-                text="Involved since 2023. Status: Active (Continuos enhancements and new features)"
+                title={astroInfo?.timeline?.title}
+                text={astroInfo?.timeline?.text1}
               />
-              <TextSection title="Role" text="Backend Developer" />
+              <TextSection
+                title={astroInfo?.role?.title}
+                text={astroInfo?.role?.text1}
+              />
             </div>
           </div>
 
           <div id="role" className="w-full mt-24">
             <p className="font-sairaStencilOne text-xl text-secondary-50">
-              My Role and Responsibilities
+              {astroInfo?.responsibilities?.title}
             </p>
             <p className="w-full text-justify text-secondary-200 mt-2 text-lg">
-              As a Backend Developer on the Astro internal project at PwC, I am
-              responsible for designing and implementing scalable server-side
-              solutions to enhance the platform's functionality and performance.
+              {astroInfo?.responsibilities?.text1}
               <span className="font-sairaStencilOne text-xl text-secondary-50">
                 {' '}
-                My contributions included:
+                {astroInfo?.responsibilities?.text2}
               </span>
             </p>
             <div className="w-full flex flex-wrap gap-y-9 mt-10">
@@ -113,15 +124,10 @@ export default function TCSAstroSection({
           </div>
 
           <div id="key-collaboration" className="w-full mt-24">
-            <p className="font-sairaStencilOne text-xl text-secondary-50">
-              Key Collaboration
-            </p>
-            <p className="w-full text-justify text-secondary-200 mt-2 text-lg">
-              I took ownership of the "Enter Time" story, driving the vision and
-              strategy for its development, where I contributed to a smoother
-              user experience and improved overall project efficiency, allowing
-              PwC to enhance its internal time tracking capabilities.
-            </p>
+            <TextSection
+              title={astroInfo?.keyCollaboration?.title}
+              text={astroInfo?.keyCollaboration?.text1}
+            />
           </div>
         </div>
       </div>

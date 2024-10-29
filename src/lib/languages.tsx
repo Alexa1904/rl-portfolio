@@ -10,16 +10,40 @@ import {
   ExpertiseIcon,
 } from '@/components/icons';
 import ContactIcon from '@/components/icons/ContactIcon';
-import ExecutableIcon from '@/components/icons/ExecutableIcon';
 import FolderIcon from '@/components/icons/FolderIcon';
 import PDFIcon from '@/components/icons/PDFIcon';
-import ZIPIcon from '@/components/icons/ZIPIcon';
 import { ILanguage } from '@/models';
-import { responsibilities, content } from './TCSAstroSection';
+import {
+  responsibilities,
+  content,
+  astroInfo,
+  contentSpanish,
+  responsibilitiesSpanish,
+  astroInfoSpanish,
+} from './TCSAstroSection';
+import { roleDescription, roleDescriptionSpanish } from './TCSSections';
 
 export const languages: ILanguage[] = [
   {
     id: 'en',
+    name: 'English',
+    availableLanguages: {
+      title: 'Select a language',
+      list: [
+        {
+          id: 'es',
+          name: 'Spanish',
+          level: 'Native',
+          width: 'w-full',
+        },
+        {
+          id: 'en',
+          name: 'English',
+          level: 'Proficient',
+          width: 'w-11/12',
+        },
+      ],
+    },
     routes: [
       {
         text: 'Experience',
@@ -47,7 +71,6 @@ export const languages: ILanguage[] = [
         icon: <ContactIcon className="w-full h-full" />,
       },
     ],
-    name: 'English',
     header: {
       role: 'Systems Engineer',
     },
@@ -82,7 +105,7 @@ export const languages: ILanguage[] = [
               id: 'role',
               name: 'Role description',
               icon: <PDFIcon className="w-6" />,
-              section: <TCSRoleDescription title="Role description" />,
+              section: <TCSRoleDescription roleDescription={roleDescription} />,
             },
             {
               id: 'projects',
@@ -95,28 +118,12 @@ export const languages: ILanguage[] = [
             {
               id: 'astro',
               name: 'Astro',
-              section: <TCSAstroSection responsibilities={responsibilities} />,
-            },
-          ],
-        },
-        {
-          id: 'avila',
-          name: 'Avila Tek',
-          startDate: '2020',
-          endDate: '2023',
-          projects: [],
-          sections: [
-            {
-              id: 'overview',
-              name: 'Overview',
-              icon: <FolderIcon className="w-6" />,
-              projects: [
-                {
-                  id: 'astro',
-                  name: 'Astro',
-                  icon: <ExecutableIcon className="w-6" />,
-                },
-              ],
+              section: (
+                <TCSAstroSection
+                  responsibilities={responsibilities}
+                  astroInfo={astroInfo}
+                />
+              ),
             },
           ],
         },
@@ -127,35 +134,108 @@ export const languages: ILanguage[] = [
   {
     id: 'es',
     name: 'Español',
+    availableLanguages: {
+      title: 'Selecione un idioma',
+      list: [
+        {
+          id: 'es',
+          name: 'Spanish',
+          level: 'Native',
+          width: 'w-full',
+        },
+        {
+          id: 'en',
+          name: 'English',
+          level: 'Proficient',
+          width: 'w-11/12',
+        },
+      ],
+    },
     routes: [
       {
         text: 'Experiencia',
-        href: '/',
-        icon: <ExperienceIcon className="w-5 h-5" />,
+        href: '/experience',
+        icon: <ExperienceIcon className="w-full h-full" />,
       },
       {
-        text: 'Perfil',
+        text: 'Sobre mi',
         href: '/about-me',
-        icon: <AboutMeIcon className="w-5 h-5" />,
+        icon: <AboutMeIcon className="w-full h-full" />,
       },
       {
         text: 'Certificados',
         href: '/certificates',
-        icon: <CertificatesIcon className="w-5 h-5" />,
+        icon: <CertificatesIcon className="w-full h-full" />,
       },
       {
         text: 'Pericia',
         href: '/expertise',
-        icon: <ExpertiseIcon className="w-5 h-5" />,
+        icon: <ExpertiseIcon className="w-full h-full" />,
       },
       {
         text: 'Contacto',
         href: '/contact',
-        icon: <ContactIcon className="w-5 h-5" />,
+        icon: <ContactIcon className="w-full h-full" />,
       },
     ],
     header: {
       role: 'Ingeniero en Sistemas',
+    },
+    experiences: {
+      introCard: {
+        role: 'Ingeniero de Software',
+        location: 'en Tata Consultancy Services',
+        urlLocation: 'https://www.tcs.com/',
+        text1: 'El futuro es AHORA, entonces',
+        text2: `Adaptémonos al futuro JUNTOS!`,
+      },
+      jobs: [
+        {
+          id: 'tcs',
+          name: 'Tata Consultancy Services',
+          startDate: '2023',
+          endDate: 'Actualmente',
+          sections: [
+            {
+              id: 'overview',
+              name: 'Descripción general',
+              icon: <PDFIcon className="w-6" />,
+              section: (
+                <TCSOverviewSection
+                  text={`Tata Consultancy Services es una organización de servicios de IT, consultoría y soluciones comerciales, que se ha estado asociando con muchas de las empresas más grandes del mundo, durante los últimos 50 años.`}
+                />
+              ),
+            },
+            {
+              id: 'role',
+              name: 'Descripción del cargo',
+              icon: <PDFIcon className="w-6" />,
+              section: (
+                <TCSRoleDescription roleDescription={roleDescriptionSpanish} />
+              ),
+            },
+            {
+              id: 'projects',
+              name: 'Proyectos',
+              icon: <FolderIcon className="w-6" />,
+              section: <TCSProjectsSection content={contentSpanish} />,
+            },
+          ],
+          projects: [
+            {
+              id: 'astro',
+              name: 'Astro',
+              section: (
+                <TCSAstroSection
+                  responsibilities={responsibilitiesSpanish}
+                  astroInfo={astroInfoSpanish}
+                />
+              ),
+            },
+          ],
+        },
+      ],
+      separatorText: 'Experiencia Laboral',
     },
   },
 ];

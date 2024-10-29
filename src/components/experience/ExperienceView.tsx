@@ -5,23 +5,39 @@ import IntroCard from './introCard/IntroCard';
 import Separator from '../common/Separator';
 import FolderIcon from '../icons/FolderIcon';
 import PageCard from '../common/PageCard';
-import { IJob, ILanguage } from '@/models';
-import SectionModal from '../common/SectionModal';
+import { IJob, ILanguage, ISection } from '@/models';
 
 interface ExperienceViewProps {
   language: ILanguage;
 }
 
 export default function ExperienceView({ language }: ExperienceViewProps) {
-  const [innerWidth, setInnerWidth] = React.useState(window?.innerWidth);
-  const [activeJob, setActiveJob] = React.useState<IJob | null>(
-    language.experiences?.jobs[0] ?? null
-  );
-  const [activeSection, setActiveSection] = React.useState();
+  const [innerWidth, setInnerWidth] = React.useState(1000);
+  const [activeJob, setActiveJob] = React.useState<IJob | null>();
+  const [activeSection, setActiveSection] = React.useState<ISection>();
+  const [jobs, setJobs] = React.useState(language?.experiences?.jobs ?? []);
 
   React.useEffect(() => {
     setInnerWidth(window.innerWidth);
-  }, [window.innerWidth]);
+  }, [window?.innerWidth]);
+
+  React.useEffect(() => {
+    setJobs(language?.experiences?.jobs ?? []);
+  }, [language]);
+
+  React.useEffect(() => {
+    if (activeJob) {
+      const job = language?.experiences?.jobs?.find(
+        (data) => data?.id === activeJob?.id
+      );
+      setActiveJob(job);
+      if (activeSection) {
+        setActiveSection(
+          job?.sections?.find((section) => section?.id === activeSection?.id)
+        );
+      }
+    }
+  }, [language]);
 
   return (
     <>
@@ -32,7 +48,7 @@ export default function ExperienceView({ language }: ExperienceViewProps) {
           className="mt-3"
         />
         <motion.div className="w-full flex flex-row space-x-14">
-          {language.experiences?.jobs.map((job, index) => (
+          {jobs?.map((job, index) => (
             <motion.button
               key={job.id}
               initial={{ opacity: 0, x: 1000 }}

@@ -2,15 +2,40 @@
 export interface ILanguage {
   id: string;
   routes: IRoute[];
+  availableLanguages: IAvailableLanguages;
   name: string;
   header?: {
     role: string;
   };
   experiences?: {
-    introCard: any;
+    introCard: {
+      role: string;
+      location: string;
+      urlLocation: string;
+      text1: string;
+      text2: string;
+    };
     jobs: IJob[];
     separatorText: string;
   };
+}
+
+export interface IAvailableLanguages {
+  title: string;
+  list: [
+    {
+      id: string;
+      name: string;
+      level: string;
+      width: string;
+    },
+    {
+      id: string;
+      name: string;
+      level: string;
+      width: string;
+    }
+  ];
 }
 
 export interface IResponsibility {
@@ -24,8 +49,21 @@ export interface IJob {
   name: string;
   startDate: string;
   endDate: string;
-  sections: any[];
-  projects: any[];
+  sections: ISection[];
+  projects: IProject[];
+}
+
+export interface ISection {
+  id: string;
+  name: string;
+  icon: JSX.Element;
+  section: JSX.Element;
+}
+
+export interface IProject {
+  id: string;
+  name: string;
+  section: JSX.Element;
 }
 
 export interface IRoute {
